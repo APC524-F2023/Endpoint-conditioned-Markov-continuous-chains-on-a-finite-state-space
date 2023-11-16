@@ -1,9 +1,7 @@
-import math
-import random
-
 import numpy as np
+import random
 from scipy import linalg
-
+import math
 
 def uniform_sampling(Q, T, a, b):
     d = len(Q)
@@ -19,11 +17,11 @@ def uniform_sampling(Q, T, a, b):
         n = n + 1
         Rn = np.linalg.matrix_power(R, n)
         sum = sum + np.exp(mu*T)*(mu*T)**n/math.factorial(n)*Rn[a,b]/P[a,b]
-
+    
     if n == 0:
         for i in np.linspace(0, T, num = 100):
             path.append((a, i))
-
+    
     elif n == 1 and a == b:
         for i in np.linspace(0, T, num = 100):
             path.append((a, i))
@@ -34,7 +32,7 @@ def uniform_sampling(Q, T, a, b):
             path.append((a, i))
         for j in np.linspace(tau, T, num = 50):
             path.append((b, j))
-
+    
     else:
         random_tau = [random.uniform(0, T) for i in range(n)]
         tau = sorted(random_tau)
@@ -43,10 +41,19 @@ def uniform_sampling(Q, T, a, b):
         for i in range(n):
             Rp1 = np.linalg.matrix_power(R, n - i - 1)
             Rp1 = Rp1[ : , b]
-            x = random.choices(population = range(d),
-                               weights = np.multiply(R[x, :], Rp1),
+            x = random.choices(population = range(d), 
+                               weights = np.multiply(R[x, :], Rp1), 
                                k = 1)[0]
             path.append((x, tau[i]))
         path.append((b, T))
-
+    
     return path
+
+# test
+Q = np.array([[0.2, 0.2, 0.6],
+              [0.5, 0.3, 0.2],
+              [0.3, 0.3, 0.4]])
+
+T = 10 
+path = uniform_sampling(Q, T, 0, 2)
+print(path)

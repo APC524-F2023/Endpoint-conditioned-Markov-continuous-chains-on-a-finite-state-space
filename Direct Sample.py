@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Created on Sun Nov 12 19:02:27 2023
 
@@ -6,7 +7,6 @@ Created on Sun Nov 12 19:02:27 2023
 
 import numpy as np
 from numpy.random import choice, exponential
-
 
 def direct_sampling_with_times(Q, T):
     # Initial state and time
@@ -36,8 +36,7 @@ def direct_sampling_with_times(Q, T):
         p_i_normalized = np.array(p_i) / np.sum(p_i)
 
         # Sampling the next state
-        next_state = choice([state for state in range(Q.shape[0]) if state != a],
-                            p=p_i_normalized)
+        next_state = choice([state for state in range(Q.shape[0]) if state != a], p=p_i_normalized)
         sample_path_with_times.append((next_state, current_time))
 
         # Update the current state
