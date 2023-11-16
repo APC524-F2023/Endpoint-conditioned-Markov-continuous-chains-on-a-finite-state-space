@@ -51,7 +51,7 @@ Q = np.array([[-1, 0.5, 0.5],
               [0.4, 0.2, -0.6]])
 
 # Define a time interval T
-T = 12  # arbitrary time interval
+T = 13  # arbitrary time interval
 
 # Perform direct sampling with times
 sample_path_with_times = direct_sampling_with_times(Q, T)
