@@ -48,12 +48,3 @@ def uniform_sampling(Q, T, a, b):
         path.append((b, T))
     
     return path
-
-# test
-Q = np.array([[0.2, 0.2, 0.6],
-              [0.5, 0.3, 0.2],
-              [0.3, 0.3, 0.4]])
-
-T = 10 
-path = uniform_sampling(Q, T, 0, 2)
-print(path)
