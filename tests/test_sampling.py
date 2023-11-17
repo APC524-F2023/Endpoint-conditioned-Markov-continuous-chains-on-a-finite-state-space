@@ -1,4 +1,3 @@
-import pytest
 from your_script_name import direct_sampling_with_times  # Replace with your actual script name
 import numpy as np
 
