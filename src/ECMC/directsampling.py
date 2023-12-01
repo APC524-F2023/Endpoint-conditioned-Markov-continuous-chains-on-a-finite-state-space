@@ -36,8 +36,9 @@ def direct_sampling_with_times(Q, T):
         p_i_normalized = np.array(p_i) / np.sum(p_i)
 
         # Sampling the next state
-        next_state = choice([state for state in range(Q.shape[0]) if state != a],
-                            p=p_i_normalized)
+        next_state = choice(
+            [state for state in range(Q.shape[0]) if state != a], p=p_i_normalized
+        )
         sample_path_with_times.append((next_state, current_time))
 
         # Update the current state
@@ -45,10 +46,9 @@ def direct_sampling_with_times(Q, T):
 
     return sample_path_with_times
 
+
 # Define a sample rate matrix Q for a 3-state system
-Q = np.array([[-1, 0.5, 0.5],
-              [0.3, -0.8, 0.5],
-              [0.4, 0.2, -0.6]])
+Q = np.array([[-1, 0.5, 0.5], [0.3, -0.8, 0.5], [0.4, 0.2, -0.6]])
 
 # Define a time interval T
 T = 13  # arbitrary time interval
