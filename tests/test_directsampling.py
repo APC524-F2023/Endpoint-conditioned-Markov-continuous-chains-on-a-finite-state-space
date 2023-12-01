@@ -1,12 +1,11 @@
-# Replace with your actual script name
-import ECMC
 import numpy as np
+from ECMC.directsampling import directsampling
 
 
-def test_direct_sampling_with_times():
+def test_directsampling():
     Q = np.array([[-1, 0.5, 0.5], [0.3, -0.8, 0.5], [0.4, 0.2, -0.6]])
     T = 13
-    result = ECMC.direct_sampling_with_times(Q, T)
+    result = directsampling(Q, T)
 
     # Test for output type
     assert isinstance(result, list), "Output should be a list"

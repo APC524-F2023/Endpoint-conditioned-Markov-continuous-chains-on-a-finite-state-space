@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "CTMC"
+name = "ETMC"
 version = "0.1.0"
 requires-python = ">=3.8"
 
@@ -23,3 +23,6 @@ select = [
   "RUF",         # Ruff-specific
   "UP",          # pyupgrade
 ]
+
+[tool.pytest.ini_options]
+pythonpath = "src"

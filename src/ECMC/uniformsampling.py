@@ -5,7 +5,7 @@ import numpy as np
 from scipy import linalg
 
 
-def uniform_sampling(Q, T, a, b):
+def uniformsampling(Q, T, a, b):
     d = len(Q)
     mu = max(np.diagonal(Q))
     R = np.identity(d) + Q / mu
