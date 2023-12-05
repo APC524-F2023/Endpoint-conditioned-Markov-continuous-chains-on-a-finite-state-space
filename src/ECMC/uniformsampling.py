@@ -6,6 +6,31 @@ from scipy import linalg
 
 
 def uniformsampling(Q, T, a, b):
+    """
+    Sampling from Markov chains.
+
+    This function simulates sample paths from an
+    end-point conditioned, continuous-time Markov chains (CTMC)
+    with finite state space using uniform sampling algorithm.
+
+
+    Parameters
+    ----------
+    Q : numpy.ndarray
+        The rate matrix for the CTMC.
+        The sum of each row add up to 0.
+    T : float
+        Endpoint of the time interval.
+    a : int
+        State at the start point (t = 0)
+    b : int
+        State at the end point (t = T)
+
+    Returns
+    -------
+    Lists
+        the sample path simulated
+    """
     d = len(Q)
     mu = max(np.diagonal(Q))
     R = np.identity(d) + Q / mu
