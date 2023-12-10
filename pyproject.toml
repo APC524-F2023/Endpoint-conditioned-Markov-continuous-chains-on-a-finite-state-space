@@ -13,6 +13,14 @@ test = [
   "scipy"
   ]
 
+docs = [
+  "furo",
+  "myst_parser >=0.13",
+  "sphinx >=4.0",
+  "sphinx-copybutton",
+  "sphinx-autodoc-typehints",
+]
+
 # reference: week 5 course note
 # https://henryiii.github.io/se-for-sci/content/week05/precommit.html
 [tool.ruff]

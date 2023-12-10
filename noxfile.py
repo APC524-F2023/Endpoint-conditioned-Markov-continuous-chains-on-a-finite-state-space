@@ -7,3 +7,22 @@ import nox
 def tests(session):
     session.install("-e.[test]")
     session.run("pytest")
+
+
+@nox.session
+def build_api_docs(session: nox.Session) -> None:
+    """
+    Build (regenerate) API docs.
+    """
+
+    session.install("sphinx")
+    session.chdir("docs")
+    session.run(
+        "sphinx-apidoc",
+        "-o",
+        "api/",
+        "--module-first",
+        "--no-toc",
+        "--force",
+        "../src/ECMC",
+    )
