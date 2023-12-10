@@ -10,19 +10,7 @@ def tests(session):
 
 
 @nox.session
-def build_api_docs(session: nox.Session) -> None:
-    """
-    Build (regenerate) API docs.
-    """
-
-    session.install("sphinx")
+def docs(session):
+    session.install("-e.[docs]")
     session.chdir("docs")
-    session.run(
-        "sphinx-apidoc",
-        "-o",
-        "api/",
-        "--module-first",
-        "--no-toc",
-        "--force",
-        "../src/ECMC",
-    )
+    session.run("sphinx-build", "-M", "html", ".", "_build")
