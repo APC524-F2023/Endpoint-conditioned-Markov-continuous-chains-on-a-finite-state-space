@@ -1,13 +1,13 @@
 # Endpoint-conditioned-Markov-continuous-chains-on-a-finite-state-space
 Final Project for APC 524 Fall 2023 at Princeton University.
 
-Contributor: Jiayu Li, Chenxiao Tian, Xuyang Xu
+Contributors: Jiayu Li, Chenxiao Tian, Xuyang Xu
 
 ## Example
 A example of how to use the uniform sampling method to study molecular evolution is included at `example.ipynb`.
 
 ## Documentation
-To generate documentation for uniformsampling in html format, run
+To generate documentation for this project in html format, run
 ```shell
 nox --sessions doc
 ```
