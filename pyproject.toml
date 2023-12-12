@@ -22,6 +22,10 @@ docs = [
   "sphinx-autodoc-typehints",
 ]
 
+# deal with some weird error in github actions
+[tool.hatch.metadata]
+allow-direct-references = true
+
 # reference: week 5 course note
 # https://henryiii.github.io/se-for-sci/content/week05/precommit.html
 [tool.ruff]
