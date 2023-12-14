@@ -49,18 +49,18 @@ def uniformsampling(Q, T, a, b):
         )
 
     if n == 0:
-        path.append(a, 0)
-        path.append(a, T)
+        path.append((a, 0))
+        path.append((a, T))
 
     elif n == 1 and a == b:
-        path.append(a, 0)
-        path.append(a, T)
+        path.append((a, 0))
+        path.append((a, T))
 
     elif n == 1 and a != b:
         tau = random.uniform(0, T)
-        path.append(a, 0)
-        path.append(b, tau)
-        path.append(b, T)
+        path.append((a, 0))
+        path.append((b, tau))
+        path.append((b, T))
 
     else:
         random_tau = [random.uniform(0, T) for i in range(n)]
