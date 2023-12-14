@@ -9,7 +9,7 @@ def test_directsampling():
 
     # # Test for non-empty output
     # assert len(result) > 0, "Output list should not be empty"
-    def directsampling(Q, T):
+def directsampling(Q, T):
     # 这里使用固定的 a 和 b 值作为示例
     # 您可能需要根据 Q 矩阵或其他逻辑来选择这些值
     a = 1
