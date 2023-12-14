@@ -1,5 +1,7 @@
-import numpy as np
 from functools import reduce
+
+import numpy as np
+
 np.set_printoptions(suppress=True)
 np.set_printoptions(linewidth=200)
 
@@ -10,15 +12,15 @@ def sample_path(a, b, N, R):
 
     # Construct the transition probability matrix and extract the a,b elem.
     P_ab = np.linalg.matrix_power(R, N)
-    p_ab = P_ab[a-1, b-1]
+    P_ab[a - 1, b - 1]
 
     # print(p_ab)
     # Initialize number of jumps and conditional probability of n jumps
     n_jumps = N
 
     # Initialize a 3rd order tensors for storing powers of R
-    R_pow = np.zeros((n_states, n_states, n_jumps+1))
-    for i in range(n_jumps+1):
+    R_pow = np.zeros((n_states, n_states, n_jumps + 1))
+    for i in range(n_jumps + 1):
         R_pow[:, :, i] = np.linalg.matrix_power(R, i)
 
     # initialize the path matrix
@@ -32,24 +34,23 @@ def sample_path(a, b, N, R):
     # transition times are uniformly distributed in the
     # interval. Sample them, sort them, and place in path.
     # np.sort(np.random.uniform(0, 1, n_jumps))
-    transitions = range(1, n_jumps+1)
-    path[1:n_jumps+1, 0] = transitions
+    transitions = range(1, n_jumps + 1)
+    path[1 : n_jumps + 1, 0] = transitions
 
     print(path)
     # Sample the states at the transition times
-    for j in range(1, n_jumps+1):
-        Rx = R[int(path[j-1, 1]-1)]
-        Rn1 = R_pow[:, b-1, n_jumps-j]
-        Rn2 = R_pow[int(path[j-1, 1]-1), b-1, n_jumps-j+1]
+    for j in range(1, n_jumps + 1):
+        Rx = R[int(path[j - 1, 1] - 1)]
+        Rn1 = R_pow[:, b - 1, n_jumps - j]
+        Rn2 = R_pow[int(path[j - 1, 1] - 1), b - 1, n_jumps - j + 1]
         print(type(Rx))
         print(Rn1)
         print(Rn2)
-        print('------')
-        state_probs = Rx*Rn1/Rn2
+        print("------")
+        state_probs = Rx * Rn1 / Rn2
 
         # NOTE: +1 is needed since state index is +1 of matrix index
-        path[j, 1] = np.random.choice(
-            n_states, 1, False, state_probs)[0]+1
+        path[j, 1] = np.random.choice(n_states, 1, False, state_probs)[0] + 1
 
     # Determine which transitions are virtual transitions
     # keep_inds = np.ones(path_nrows, dtype=bool)
@@ -63,7 +64,11 @@ def sample_path(a, b, N, R):
 
 
 def P_matrix(a, b, u, v, i, N, R):
-    return R[u, v] * np.linalg.matrix_power(R, N-i)[v, b] / np.linalg.matrix_power(R, N-i+1)[u, b]
+    return (
+        R[u, v]
+        * np.linalg.matrix_power(R, N - i)[v, b]
+        / np.linalg.matrix_power(R, N - i + 1)[u, b]
+    )
 
 
 def Muv(a, b, u, v, N, R):
@@ -72,9 +77,12 @@ def Muv(a, b, u, v, N, R):
     u -= 1
     v -= 1
     M = 0
-    for i in range(1, N+1):
-        M += np.linalg.matrix_power(R, i-1)[a, u] * \
-            R[u, v] * np.linalg.matrix_power(R, N-i)[v, b]
+    for i in range(1, N + 1):
+        M += (
+            np.linalg.matrix_power(R, i - 1)[a, u]
+            * R[u, v]
+            * np.linalg.matrix_power(R, N - i)[v, b]
+        )
 
     return M
 
@@ -84,17 +92,17 @@ def path_prob(path, a, b, N, R):
 
     _p = []
     _s = 0
-    for i in range(1, n_jumps+1):
-        u = path[i-1]
+    for i in range(1, n_jumps + 1):
+        u = path[i - 1]
         v = path[i]
-        p = P_matrix(a-1, b-1, u-1, v-1, i, N, R)
+        p = P_matrix(a - 1, b - 1, u - 1, v - 1, i, N, R)
         _p.append(p)
         # print(_p)
         # _s += reduce(lambda x, y: x*y, _p)
         # print(_s)
 
-#    print(_p)
-    _r = reduce(lambda x, y: x*y, _p)
+    #    print(_p)
+    _r = reduce(lambda x, y: x * y, _p)
     print(_r)
     # print(_r/_s)
 
@@ -160,11 +168,10 @@ def path_prob(path, a, b, N, R):
 
 def Icd(N, R):
     n_states = len(R)
-    I = np.zeros((n_states, n_states))
+    In = np.zeros((n_states, n_states))
     for i in range(0, N):
-        I = I+np.linalg.matrix_power(R, i) * \
-            np.linalg.matrix_power(R, N-i)
-    return I
+        In = In + np.linalg.matrix_power(R, i) * np.linalg.matrix_power(R, N - i)
+    return In
 
 
 def Da(a, b, u, N, R):
@@ -173,13 +180,11 @@ def Da(a, b, u, N, R):
     u -= 1
     M = 0
     for i in range(N):
-        M += np.linalg.matrix_power(R, i)[a, u] * \
-            np.linalg.matrix_power(R, N-i)[u, b]
+        M += np.linalg.matrix_power(R, i)[a, u] * np.linalg.matrix_power(R, N - i)[u, b]
     return M
 
 
 def PNuv(a, b, u, v, K, N, R):
-
     a -= 1
     b -= 1
     u -= 1
@@ -189,18 +194,18 @@ def PNuv(a, b, u, v, K, N, R):
     U = np.zeros((n_states, n_states))
     U[u, v] = 1
 
-    P = np.zeros((N+1, N+1, n_states, n_states))
-    M = N+1
+    P = np.zeros((N + 1, N + 1, n_states, n_states))
+    N + 1
     P[0, 0] = np.eye(n_states)
     P[0, 1] = R - R * U
     P[1, 1] = R * U
 
-    for n in range(2, N+1):
-        P[0, n] = P[0, n-1].dot(R-R * U)
+    for n in range(2, N + 1):
+        P[0, n] = P[0, n - 1].dot(R - R * U)
 
-    for n in range(1, N+1):
+    for n in range(1, N + 1):
         for k in range(1, n):
-            P[k, n] = P[k-1, n-1].dot(R*U) + P[k, n-1].dot(R-R*U)
+            P[k, n] = P[k - 1, n - 1].dot(R * U) + P[k, n - 1].dot(R - R * U)
             # _P = np.zeros((n_states, n_states))
             # for c in range(1, M):
             #     _P = _P + P[k, n, a, c] * R[c, b]
@@ -236,6 +241,7 @@ def PNuv(a, b, u, v, K, N, R):
 
     pass
 
+
 # def PDa(a, b, u, K, N, R):
 #     a -= 1
 #     b -= 1
@@ -251,63 +257,67 @@ def PNuv(a, b, u, v, K, N, R):
 #     P[0, 0] = 0
 #     P[1, 0] = 1
 #     print(P)
-    # for i in range(n_states):
-    #     V[i, a] = 1
+# for i in range(n_states):
+#     V[i, a] = 1
 
-    # Pa = {}
-    # Pa[(0, 0)] = np.eye(n_states) - U
-    # Pa[(1, 0)] = U
+# Pa = {}
+# Pa[(0, 0)] = np.eye(n_states) - U
+# Pa[(1, 0)] = U
 
-    # for k in range(0, N+1):
-    #     Pa[(-1, k)] = np.eye(n_states) - U  # np.zeros((n_states, n_states))
+# for k in range(0, N+1):
+#     Pa[(-1, k)] = np.eye(n_states) - U  # np.zeros((n_states, n_states))
 
-    # for k in range(1, N+1):
-    #     for j in range(k, N+1):
-    #         Pa[(j, k-1)] = np.zeros((n_states, n_states))
-    #         H[j, k-1] = 2
-    #     Pa[(k, k-1)] = U
-    #     H[k, k-1] = 1
-    # print(H)
-    # for k in range(0, N+1):
-    #     print('k', k)
-    #     for n in range(1, N+1):
-    #         print('n', n)
-    #         #     if k <= n:
-    #         Pa[(k, n)] = Pa[(k-1, n-1)].dot(R*V) + Pa[(k, n-1)].dot(R-R*V)
+# for k in range(1, N+1):
+#     for j in range(k, N+1):
+#         Pa[(j, k-1)] = np.zeros((n_states, n_states))
+#         H[j, k-1] = 2
+#     Pa[(k, k-1)] = U
+#     H[k, k-1] = 1
+# print(H)
+# for k in range(0, N+1):
+#     print('k', k)
+#     for n in range(1, N+1):
+#         print('n', n)
+#         #     if k <= n:
+#         Pa[(k, n)] = Pa[(k-1, n-1)].dot(R*V) + Pa[(k, n-1)].dot(R-R*V)
 
-    # print(Pa[1, 4].sum(axis=1))
-    # Puv = {}
-    # Puv[(0, 0)] = np.eye(n_states)
-    # Puv[(0, 1)] = R - R * U
-    # Puv[(1, 1)] = R * U
+# print(Pa[1, 4].sum(axis=1))
+# Puv = {}
+# Puv[(0, 0)] = np.eye(n_states)
+# Puv[(0, 1)] = R - R * U
+# Puv[(1, 1)] = R * U
 
-    # for k in range(1, N+1):
-    #     Puv[(k, 0)] = np.eye(n_states)  # np.zeros((n_states, n_states))
+# for k in range(1, N+1):
+#     Puv[(k, 0)] = np.eye(n_states)  # np.zeros((n_states, n_states))
 
-    # for n in range(2, N+1):
-    #     Puv[(0, n)] = Puv[(0, n-1)].dot(R-R*U)
+# for n in range(2, N+1):
+#     Puv[(0, n)] = Puv[(0, n-1)].dot(R-R*U)
 
-    # for n in range(1, N+1):
-    #     for k in range(1, N+1):
-    #         misc = Puv.get((k, n), None)
-    #         if misc is None:
-    #             Puv[(k, n)] = Puv[(k-1, n-1)].dot(R*U) + \
-    #                 Puv[(k, n-1)].dot(R-R*U)
+# for n in range(1, N+1):
+#     for k in range(1, N+1):
+#         misc = Puv.get((k, n), None)
+#         if misc is None:
+#             Puv[(k, n)] = Puv[(k-1, n-1)].dot(R*U) + \
+#                 Puv[(k, n-1)].dot(R-R*U)
 
-    # print('p', Puv[4, 4][u, v])
-    # return Puv[0, 2]
+# print('p', Puv[4, 4][u, v])
+# return Puv[0, 2]
 
 
 def main():
-    T = np.array([[0, 1/2, 1/2, 0, 0, 0, 0],
-                  [1/3, 0, 1/3, 1/3, 0, 0, 0],
-                  [1/2, 1/2, 0, 0, 0, 0, 0],
-                  [0, 1/4, 0, 0, 1/4, 1/4, 1/4],
-                  [0, 0, 0, 1/2, 0, 1/2, 0],
-                  [0, 0, 0, 1/3, 1/3, 0, 1/3],
-                  [0, 0, 0, 1/2, 0, 1/2, 0]])
+    T = np.array(
+        [
+            [0, 1 / 2, 1 / 2, 0, 0, 0, 0],
+            [1 / 3, 0, 1 / 3, 1 / 3, 0, 0, 0],
+            [1 / 2, 1 / 2, 0, 0, 0, 0, 0],
+            [0, 1 / 4, 0, 0, 1 / 4, 1 / 4, 1 / 4],
+            [0, 0, 0, 1 / 2, 0, 1 / 2, 0],
+            [0, 0, 0, 1 / 3, 1 / 3, 0, 1 / 3],
+            [0, 0, 0, 1 / 2, 0, 1 / 2, 0],
+        ]
+    )
 
-    x = np.array([1, 0, 0, 0, 0, 0, 0])
+    np.array([1, 0, 0, 0, 0, 0, 0])
 
     # print(np.linalg.matrix_power(T, 10).dot(x))
     # path = sample_path(a=1, b=7, N=4, R=T)
@@ -333,7 +343,7 @@ def main():
     # print(M)
 
     N = 20
-    I = Icd(N, R=T)
+    Icd(N, R=T)
     print(T)
     Pab = np.linalg.matrix_power(T, N)
     # print(I[1, 1])
@@ -343,11 +353,11 @@ def main():
 
     _D = Da(a=1, b=7, u=2, N=N, R=T)
     print(_D)
-    print(_D/Pab[0, 6])
+    print(_D / Pab[0, 6])
 
     _N = Muv(a=1, b=7, u=2, v=4, N=N, R=T)
     print(_N)
-    print(_N/Pab[0, 6])
+    print(_N / Pab[0, 6])
 
     # sim = []
     # for i in range(100):
@@ -366,12 +376,14 @@ def main():
 
     P = PNuv(a=1, b=7, u=2, v=4, K=3, N=5, R=T)
     Pab = np.linalg.matrix_power(T, 5)
-    print(P/Pab[0, 6])
+    print(P / Pab[0, 6])
     # print(P[1, 3])
     # Q = P/Pab[0, 6]
     # print(Q[1, 1])
 
     print(sample_path(a=1, b=7, N=3, R=T))
+
+
 #    P = PDa(a=1, b=7, u=2, K=4, N=4, R=T)
 
 
