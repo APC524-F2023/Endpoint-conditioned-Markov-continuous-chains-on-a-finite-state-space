@@ -6,7 +6,7 @@ from ECMC.rejectionsampling import simpleforward
 from ECMC.rejectionsampling import modifiedforward
 
 
-def test_uniformsampling():
+def test_rejectionsampling():
     random.seed(2023)
     Q = np.array([[-1, 0.5, 0.5], [0.5, -1, 0.5], [0.5, 0.5, -1]])
     bgnst = 1
