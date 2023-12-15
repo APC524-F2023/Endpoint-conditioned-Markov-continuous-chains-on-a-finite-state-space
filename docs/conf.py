@@ -19,8 +19,8 @@ sys.path.insert(0, os.path.abspath("../src/ECMC"))
 # -- Project information -----------------------------------------------------
 
 project = "ECMC"
-copyright = "2023, Jiayu Li"
-author = "Jiayu Li"
+copyright = "2023, Jiayu Li, Chenxiao Tian, Xuyang Xu"
+author = "Jiayu Li, Chenxiao Tian, Xuyang Xu"
 
 
 # -- General configuration ---------------------------------------------------
