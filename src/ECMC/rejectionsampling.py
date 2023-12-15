@@ -144,16 +144,16 @@ def modifiedforward(bgnst, endst, ratem, tm):
         return p
 
 
-bgnst = 1  # State at the start point
-endst = 2  # State at the end point
-rate = np.array([[-2, 1, 1], [1, -2, 1], [1, 1, -2]])  # The rate matrix for the CTMC.
+# bgnst = 1  # State at the start point
+# endst = 2  # State at the end point
+# rate = np.array([[-2, 1, 1], [1, -2, 1], [1, 1, -2]])  # The rate matrix for the CTMC.
 
 
-# import time
-# start_time = time.time()
+# # import time
+# # start_time = time.time()
 
-# simpleforward(bgnst,rate,1,5)
-modifiedforward(bgnst, endst, rate, 100)
+# # simpleforward(bgnst,rate,1,5)
+# modifiedforward(bgnst, endst, rate, 100)
 
 # end_time = time.time()
 # execution_time = end_time - start_time
