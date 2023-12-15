@@ -7,10 +7,3 @@ import nox
 def tests(session):
     session.install("-e.[test]")
     session.run("pytest")
-
-
-@nox.session
-def docs(session):
-    session.install("-e.[docs]")
-    session.chdir("docs")
-    session.run("sphinx-build", "-M", "html", ".", "_build")
