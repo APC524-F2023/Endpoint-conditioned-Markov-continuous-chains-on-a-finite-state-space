@@ -7,9 +7,9 @@ Contributors: Jiayu Li, Chenxiao Tian, Xuyang Xu
 A example of how to use the uniform sampling method to study molecular evolution is included at `example.ipynb`.
 
 ## Documentation
-To generate documentation for this project in html format, go to the docs directory, and run
+To generate documentation for this project in html format and view it, run
 ```shell
-make html
+nox --session docs
 ```
 
 The file is located at `docs/build/html/index.html`.
@@ -17,7 +17,7 @@ The file is located at `docs/build/html/index.html`.
 ## Testing
 Run
 ```shell
-nox --sessions tests
+nox --session tests
 ```
 
 ## Contribution
