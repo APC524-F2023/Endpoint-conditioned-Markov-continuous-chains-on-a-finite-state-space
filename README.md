@@ -7,9 +7,9 @@ Contributors: Jiayu Li, Chenxiao Tian, Xuyang Xu
 A example of how to use the uniform sampling method to study molecular evolution is included at `example.ipynb`.
 
 ## Documentation
-To generate documentation for this project in html format, run
+To generate documentation for this project in html format, go to the docs directory, and run
 ```shell
-nox --sessions doc
+make html
 ```
 
 The file is located at `docs/build/html/index.html`.
@@ -21,5 +21,5 @@ nox --sessions tests
 ```
 
 ## Contribution
-Jiayu Li is responsible for the implementation and testing of uniformsampling method, setup of CI, packaging, and documentation (including the nox session), and demonstration of uniformsampling in molecular evolution.
+Jiayu Li is responsible for the implementation and testing of uniformsampling method, setup of CI, packaging, and documentation, and demonstration of uniformsampling in molecular evolution.
              Chenxiao Tian is responsible for adjusting the CI testing
