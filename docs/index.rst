@@ -5,14 +5,15 @@ Welcome to ECMC's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-Uniform Sampling
-================
-.. automodule:: uniformsampling
-   :members:
 
 Rejection Sampling
 ==================
 .. automodule:: rejectionsampling
+   :members:
+
+Uniform Sampling
+================
+.. automodule:: uniformsampling
    :members:
 
 
