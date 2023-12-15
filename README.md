@@ -23,3 +23,4 @@ nox --session tests
 ## Contribution
 Jiayu Li is responsible for the implementation and testing of uniformsampling method, setup of CI, packaging, and documentation, and demonstration of uniformsampling in molecular evolution.
              Chenxiao Tian is responsible for adjusting the CI testing
+Xuyang Xu mainly contributions to the part of forward sampling and rejection sampling, the testing of rejection sampling method and the changes of computational cost when parameters are changed.
