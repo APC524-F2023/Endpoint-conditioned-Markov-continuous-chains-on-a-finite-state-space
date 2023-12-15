@@ -1,12 +1,14 @@
 import random
 import numpy as np
 
-from ECMC.rejectionsampling import rejectionsampling
+from ECMC.rejectionsampling import Path
+from ECMC.rejectionsampling import simpleforward
+from ECMC.rejectionsampling import modifiedforward
 
 
-def test_uniformsampling():
+def test_rejectionsampling():
     random.seed(2023)
-    Q = np.array([[1, -0.5, -0.5], [-0.5, 1, -0.5], [-0.5, -0.5, 1]])
+    Q = np.array([[-1, 0.5, 0.5], [0.5, -1, 0.5], [0.5, 0.5, -1]])
     bgnst = 1
     endst = 2
     result = modifiedforward(bgnst, endst, Q, 10)
