@@ -14,6 +14,7 @@ test = [
   ]
 
 docs = [
+  "scipy",
   "numpy",
   "sphinx",
   "myst_parser >=0.13",
