@@ -1,9 +1,7 @@
 import random
-import numpy as np
 
-from ECMC.rejectionsampling import Path
-from ECMC.rejectionsampling import simpleforward
-from ECMC.rejectionsampling import modifiedforward
+import numpy as np
+from ECMC.rejectionsampling import Path, modifiedforward
 
 
 def test_rejectionsampling():
