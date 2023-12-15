@@ -3,6 +3,9 @@ Welcome to ECMC's documentation!
 .. automodule:: uniformsampling
    :members:
 
+.. automodule:: rejectionsampling
+   :members:
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:

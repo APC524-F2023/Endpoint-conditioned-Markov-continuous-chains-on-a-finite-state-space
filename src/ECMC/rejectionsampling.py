@@ -1,22 +1,23 @@
-import numpy as np
 import random
-import timeit
+
+import numpy as np
 
 
 class Path:
     """
     A class describing the CTMC jumps
-    
+
     :parameter
-    length : int 
+    length : int
         the number of jumps
     array_a : int
         every state
     array_b : float
         every jumping time
     """
-    def __init__(self, l, a, b):
-        self.length = l
+
+    def __init__(self, length, a, b):
+        self.length = length
         self.array_a = a
         self.array_b = b
 
