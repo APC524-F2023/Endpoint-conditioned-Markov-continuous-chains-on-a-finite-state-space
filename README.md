@@ -1,3 +1,28 @@
 # Endpoint-conditioned-Markov-continuous-chains-on-a-finite-state-space
-APC 524 Group Project：
- Jiayu Li Xuyang Xu Chenxiao Tian
+Final Project for APC 524 Fall 2023 at Princeton University.
+
+Contributors: Jiayu Li, Chenxiao Tian, Xuyang Xu
+
+## Example
+A example of how to use the uniform sampling method to study molecular evolution is included at `example.ipynb`.
+
+## Documentation
+To generate documentation for this project in html format and view it, run
+```shell
+nox --session docs
+```
+
+The file is located at `docs/build/html/index.html`.
+
+## Testing
+Run
+```shell
+nox --session tests
+```
+
+## Contribution
+Jiayu Li is responsible for the implementation and testing of uniformsampling method, setup of CI, packaging, and documentation, and demonstration of uniformsampling in molecular evolution.
+
+Chenxiao Tian is responsible for adjusting the CI testing.His contributions also partly culminate in the development of a comprehensive sampling algorithm, referred to as "Algorithm 3: Direct Sampling." This algorithm orchestrates the simulation of the next state and the waiting time until a state change occurs, effectively generating sample paths for the CTMC.
+
+Xuyang Xu mainly contributions to the part of forward sampling and rejection sampling, the testing of rejection sampling method and the changes of computational cost when parameters are changed.

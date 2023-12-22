@@ -3,17 +3,25 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "CTMC"
+name = "ECMC"
 version = "0.1.0"
 requires-python = ">=3.8"
 
 [project.optional-dependencies]
 test = [
   "pytest",
-  "random",
-  "math",
   "scipy"
   ]
+
+docs = [
+  "scipy",
+  "numpy",
+  "sphinx",
+  "myst_parser >=0.13",
+  "sphinx >=4.0",
+  "sphinx-copybutton",
+  "sphinx-autodoc-typehints",
+]
 
 # reference: week 5 course note
 # https://henryiii.github.io/se-for-sci/content/week05/precommit.html
@@ -25,3 +33,6 @@ select = [
   "RUF",         # Ruff-specific
   "UP",          # pyupgrade
 ]
+
+[tool.pytest.ini_options]
+pythonpath = "src"
